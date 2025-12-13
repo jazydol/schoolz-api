@@ -6,10 +6,10 @@ import {
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { User, UserDocument } from './schemas/user.schema';
-import { CreateUserDto } from './dto/create-user.dto';
-import { CreateUserAdminDto } from './dto/create-user-admin.dto';
-import { UserType } from './enums/user-type.enum';
-import { canCreateUserType } from './utils/user-permissions.util';
+import { CreateUserDto } from '../modules/users/dto/create-user.dto';
+import { CreateUserAdminDto } from '../modules/users/dto/create-user-admin.dto';
+import { UserType } from '../modules/users/enums/user-type.enum';
+import { canCreateUserType } from '../common/utils/user-permissions.util';
 
 @Injectable()
 export class UsersService {

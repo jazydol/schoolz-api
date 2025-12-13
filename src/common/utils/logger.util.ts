@@ -1,6 +1,6 @@
-import { Logger } from '@nestjs/common';
+import { ConsoleLogger } from '@nestjs/common';
 
-export class AppLogger extends Logger {
+export class AppLogger extends ConsoleLogger {
   log(message: string, context?: string) {
     super.log(message, context);
   }

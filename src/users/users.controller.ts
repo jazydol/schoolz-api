@@ -8,11 +8,11 @@ import {
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { User } from './schemas/user.schema';
-import { CreateUserDto } from './dto/create-user.dto';
-import { CreateUserAdminDto } from './dto/create-user-admin.dto';
-import { RolesGuard } from './guards/roles.guard';
-import { Roles } from './decorators/roles.decorator';
-import { UserType } from './enums/user-type.enum';
+import { CreateUserDto } from '../modules/users/dto/create-user.dto';
+import { CreateUserAdminDto } from '../modules/users/dto/create-user-admin.dto';
+import { RolesGuard } from '../common/guards/roles.guard';
+import { Roles } from '../common/decorators/roles.decorator';
+import { UserType } from '../modules/users/enums/user-type.enum';
 
 @Controller('users')
 export class UsersController {

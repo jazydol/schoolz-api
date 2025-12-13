@@ -8,7 +8,7 @@ import { User, UserDocument } from './schemas/user.schema';
 import { CreateUserDto } from './dto/create-user.dto';
 import { CreateUserAdminDto } from './dto/create-user-admin.dto';
 import { UserType } from './enums/user-type.enum';
-import { canCreateUserType } from '../../../common/utils/user-permissions.util';
+import { canCreateUserType } from '../../common/utils/user-permissions.util';
 
 @Injectable()
 export class UsersService {
