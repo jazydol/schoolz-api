@@ -10,6 +10,7 @@ import { UsersService } from './users.service';
 import { User } from './schemas/user.schema';
 import { CreateUserDto } from './dto/create-user.dto';
 import { CreateUserAdminDto } from './dto/create-user-admin.dto';
+import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
 import { RolesGuard } from '../../common/guards/roles.guard';
 import { Roles } from '../../common/decorators/roles.decorator';
 import { UserType } from './enums/user-type.enum';
@@ -30,22 +31,14 @@ export class UsersController {
   }
 
   // Admin-only endpoint - only super_admin and school_admin can access
-  // TODO: Add JWT AuthGuard before RolesGuard to populate request.user
-  @UseGuards(RolesGuard)
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(UserType.SUPER_ADMIN, UserType.SCHOOL_ADMIN)
   @Post('admin/create')
   async createByAdmin(
     @Body() createUserAdminDto: CreateUserAdminDto,
-    @Request() req: any, // Will be properly typed when JWT guard is added
+    @Request() req: any,
   ): Promise<User> {
-    // Get the requester's role from the authenticated user
-    // This will come from JWT token once authentication is implemented
     const requesterRole = req.user?.type as UserType;
-
-    if (!requesterRole) {
-      throw new Error('User role not found. Ensure JWT AuthGuard is implemented.');
-    }
-
     return this.usersService.createByAdmin(createUserAdminDto, requesterRole);
   }
 }

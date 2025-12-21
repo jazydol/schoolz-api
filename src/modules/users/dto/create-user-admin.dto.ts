@@ -1,4 +1,11 @@
-import { IsEmail, IsEnum, IsNotEmpty, IsOptional, IsString, MinLength } from 'class-validator';
+import {
+  IsEmail,
+  IsEnum,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  MinLength,
+} from 'class-validator';
 import { UserType } from '../enums/user-type.enum';
 
 export class CreateUserAdminDto {
@@ -19,4 +26,3 @@ export class CreateUserAdminDto {
   @IsEnum(UserType)
   type: UserType;
 }
-
