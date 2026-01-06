@@ -20,6 +20,9 @@ import { UserType } from './enums/user-type.enum';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
+  // Only school admins and super admins can view all users
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(UserType.SUPER_ADMIN, UserType.SCHOOL_ADMIN)
   @Get()
   async findAll(): Promise<User[]> {
     return this.usersService.findAll();
