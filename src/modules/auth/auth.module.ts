@@ -13,15 +13,16 @@ import { User, UserSchema } from '../users/schemas/user.schema';
     PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.registerAsync({
       imports: [ConfigModule],
-      useFactory: (configService: ConfigService) => {
+      useFactory: (configService: ConfigService): any => {
         const secret = configService.get<string>('app.jwtSecret');
         if (!secret) {
           throw new Error('JWT_SECRET is not defined in environment variables');
         }
+        const expiresIn = configService.get<string>('app.jwtExpiresIn', '7d');
         return {
           secret,
           signOptions: {
-            expiresIn: (configService.get<string>('app.jwtExpiresIn', '7d') as string),
+            expiresIn: expiresIn || '7d',
           },
         };
       },
@@ -34,4 +35,3 @@ import { User, UserSchema } from '../users/schemas/user.schema';
   exports: [AuthService, JwtModule, PassportModule],
 })
 export class AuthModule {}
-

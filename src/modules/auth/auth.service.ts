@@ -1,8 +1,4 @@
-import {
-  Injectable,
-  UnauthorizedException,
-  ConflictException,
-} from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
@@ -20,7 +16,10 @@ export class AuthService {
     private configService: ConfigService,
   ) {}
 
-  async validateUser(email: string, password: string): Promise<User | null> {
+  async validateUser(
+    email: string,
+    password: string,
+  ): Promise<UserDocument | null> {
     const user = await this.userModel.findOne({ email }).exec();
 
     if (!user || !user.password) {
@@ -74,4 +73,3 @@ export class AuthService {
     return bcrypt.compare(password, hashedPassword);
   }
 }
-
