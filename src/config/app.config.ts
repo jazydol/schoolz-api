@@ -6,5 +6,6 @@ export default registerAs('app', () => ({
   apiPrefix: process.env.API_PREFIX || 'api',
   jwtSecret: process.env.JWT_SECRET,
   jwtExpiresIn: process.env.JWT_EXPIRES_IN || '7d',
+  bootstrapToken: process.env.BOOTSTRAP_TOKEN,
 }));
 
